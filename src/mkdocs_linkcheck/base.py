@@ -65,6 +65,7 @@ def check_links(
     method: str = "get",
     use_async: bool = True,
     local: bool = False,
+    remote: bool = False,
     recurse: bool = False,
     exclude: [str] = None
 ) -> T.Iterable[tuple]:

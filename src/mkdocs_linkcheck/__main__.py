@@ -46,7 +46,7 @@ def main():
         help="only check local files",
         action="store_true")
     exclusive_group.add_argument(
-        "-r","--remote",
+        "--remote",
         help="only check remote files",
         action="store_true")
     p.add_argument(
@@ -66,7 +66,7 @@ def main():
         method=P.method,
         use_async=not P.sync,
         local=P.local,
-        remote-P.remote,
+        remote=P.remote,
         recurse=P.recurse,
         exclude=P.exclude
     )
