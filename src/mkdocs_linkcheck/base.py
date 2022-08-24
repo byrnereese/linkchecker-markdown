@@ -5,6 +5,7 @@ import logging
 import re
 import asyncio
 import os
+import warnings
 from operator import itemgetter
 
 from .coro import check_urls as check_urls_async
@@ -200,6 +201,7 @@ def check_remotes(
         hdr = {"User-Agent": USER_AGENT}
 
     # %% session
+    warnings.simplefilter("ignore")
     if use_async:
         missing = asyncio.run(
             check_urls_async( urls, hdr=hdr, method=method )
