@@ -13,6 +13,7 @@ from .base import check_links
 
 def main():
     p = argparse.ArgumentParser(description="Check links in markdown files common to mkdocs-generated websites")
+    exclusive_group= p.add_mutually_exclusive_group()
     p.add_argument(
         "path",
         help="Path to markdown files")
@@ -40,9 +41,13 @@ def main():
         "--exclude",
         help="a pattern for a file or path to exclude",
         action="append")
-    p.add_argument(
+    exclusive_group.add_argument(
         "-l","--local",
         help="only check local files",
+        action="store_true")
+    exclusive_group.add_argument(
+        "--remote",
+        help="only check remote files",
         action="store_true")
     p.add_argument(
         "-r", "--recurse",
@@ -61,6 +66,7 @@ def main():
         method=P.method,
         use_async=not P.sync,
         local=P.local,
+        remote=P.remote,
         recurse=P.recurse,
         exclude=P.exclude
     )

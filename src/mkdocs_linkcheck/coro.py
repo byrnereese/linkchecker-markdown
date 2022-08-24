@@ -30,11 +30,9 @@ async def check_urls(
 ) -> list[tuple[str, str, T.Any]]:
     tasks = [check_url(u, hdr, method=method) for u in urls]
 
-    warnings.simplefilter("ignore")
 
     urls = await asyncio.gather(*tasks)
 
-    warnings.resetwarnings()
 
     # this is per aiohttp manual, when using HTTPS SSL sites, just before closing
     # the event loop, do a 250ms sleep (not for each site)

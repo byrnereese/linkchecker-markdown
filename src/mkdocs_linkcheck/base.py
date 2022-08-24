@@ -5,6 +5,7 @@ import logging
 import re
 import asyncio
 import os
+import warnings
 from operator import itemgetter
 
 from .coro import check_urls as check_urls_async
@@ -65,21 +66,23 @@ def check_links(
     method: str = "get",
     use_async: bool = True,
     local: bool = False,
+    remote: bool = False,
     recurse: bool = False,
     exclude: [str] = None
 ) -> T.Iterable[tuple]:
 
     local_links, remote_links = extract_links( path, ext=ext, recurse=recurse, domain=domain, exclude=exclude )
 
-    for l in local_links:
-        link = l['url']
-        if len(link) > 0 and link[0] == "#":
-            continue
-        # strip any hashtags
-        link = re.sub(r'#.*$','',str(link))
-        SUMMARY['local'] += 1
-        SUMMARY['total'] += 1
-        check_local( link, ext=ext, fn=l['fn'], path=l['path'] )        
+    if not remote:
+        for l in local_links:
+            link = l['url']
+            if len(link) > 0 and link[0] == "#":
+                continue
+            # strip any hashtags
+            link = re.sub(r'#.*$','',str(link))
+            SUMMARY['local'] += 1
+            SUMMARY['total'] += 1
+            check_local( link, ext=ext, fn=l['fn'], path=l['path'] )        
 
     """
     This is kind of broken. At this point all of the remote URLs have been discovered, yet
@@ -198,6 +201,7 @@ def check_remotes(
         hdr = {"User-Agent": USER_AGENT}
 
     # %% session
+    warnings.simplefilter("ignore")
     if use_async:
         missing = asyncio.run(
             check_urls_async( urls, hdr=hdr, method=method )

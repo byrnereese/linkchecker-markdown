@@ -81,6 +81,7 @@ Optional arguments:
 * `--sync` - enable synchronous checking of remote links, or do not use asyncio
 * `--exclude str` - a pattern for a file or path to exclude from being checked; use this argument multiple times to exclude multiple files. Regular expressions are ok. 
 * `-local` - check local files only
+* `-remote` - check remote links only 
 * `-r`, `--recurse` - recurse through all directories under path
 * `-v` or `--verbose` -prints the URLs as they are checked
 
