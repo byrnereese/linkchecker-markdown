@@ -44,7 +44,7 @@ The examples assume webpage Markdown files have top-level directory ~/docs.
 ### Python code
 
 ```python
-import mkdocs-linkcheck as lc
+import mkdocs_linkcheck as lc
 lc.check_links("~/docs")
 ```
 
@@ -59,7 +59,7 @@ mkdocs-linkcheck
 or
 
 ```sh
-python -m mkdocs-linkcheck
+python -m mkdocs_linkcheck
 ```
 
 #### Command link arguments
