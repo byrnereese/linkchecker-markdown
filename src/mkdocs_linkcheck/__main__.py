@@ -42,7 +42,7 @@ def main():
         action="append")
     p.add_argument(
         "-l","--local",
-        help="only check local files",
+        help="only check local links",
         action="store_true")
     p.add_argument(
         "-r", "--recurse",
